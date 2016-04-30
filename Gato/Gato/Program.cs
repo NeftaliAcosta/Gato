@@ -10,25 +10,13 @@ namespace Gato
     {
         /*Inicio Declaración de variables globales*/
         
+
         /*Inicio Declaración de variables globales*/
         static void Main(string[] args)
         {
-            string name1 = "";
-            string name2 = "";
-
-
-
-
-
+          
             asignacion();
             Console.Read();
-            Console.WriteLine("Nombre del jugador 1: ");
-            name1 = Console.ReadLine();
-            Console.Clear();
-            Console.WriteLine("Nombre del jugador 2: ");
-            name2 = Console.ReadLine();
-           
-
             instrucciones();
             Console.Read();
             asignacion();
@@ -63,9 +51,32 @@ namespace Gato
 
         static void asignacion()
         {
+            jugador jugador1 = new jugador();
+            jugador jugador2 = new jugador();
+
+
+            Console.WriteLine("Escriba el nombre del jugador 1");
+            jugador1.nombre = Console.ReadLine();
+            Console.Clear();
+            Console.WriteLine("Escriba el nombre del jugador 2");
+            jugador2.nombre = Console.ReadLine();
             Random r = new Random(DateTime.Now.Millisecond);
             int n = r.Next(0, 10);
-            Console.WriteLine(n);
+
+            if (n > 5)
+            {
+                jugador1.caracter = 'X';
+                jugador2.caracter = 'O';
+            }
+            else
+            {
+                jugador1.caracter = 'O';
+                jugador2.caracter = 'X';
+            }
+
+            Console.WriteLine("ASIGNACION");
+            Console.WriteLine(jugador1.nombre + ":" + jugador1.caracter);
+            Console.WriteLine(jugador2.nombre + ":" + jugador2.caracter);
 
         }
     }
