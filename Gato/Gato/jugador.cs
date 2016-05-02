@@ -11,6 +11,15 @@ namespace Gato
 
         public string nombre;
         public char caracter;
+        string[] position = new string[9];
+        public int puntos;
 
     }
+
+    class mytablero
+    {
+        string[] pos = new string[9];
+    }
+
+   
 }
