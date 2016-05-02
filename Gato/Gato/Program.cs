@@ -15,9 +15,10 @@ namespace Gato
         /*Inicio Declaración de variables globales*/
         static void Main(string[] args)
         {
+            
             jugador jugador1 = new jugador();
             jugador jugador2 = new jugador();
-            
+           
 
             instrucciones();
             Console.WriteLine("Escriba el nombre del jugador 1");
@@ -29,21 +30,21 @@ namespace Gato
 
             if (n > 5)
             {
-                jugador1.caracter = 'X';
-                jugador2.caracter = 'O';
+                jugador1.caracter = "X";
+                jugador2.caracter = "O";
             }
             else
             {
-                jugador1.caracter = 'O';
-                jugador2.caracter = 'X';
+                jugador1.caracter = "O";
+                jugador2.caracter = "X";
             }
             Console.WriteLine("---ASIGNACION---");
             Console.WriteLine(jugador1.nombre + ":" + jugador1.caracter);
             Console.WriteLine(jugador2.nombre + ":" + jugador2.caracter);
-            Console.WriteLine("¡PRESIONE UNA TECLA PARA COMENZAR LA PARTIDA!...");
-            Console.Read();
-            iniciopartida(jugador1.nombre, jugador2.nombre);
-            Console.Read();
+            Console.WriteLine("¡Preparando la partida!.........");
+            System.Threading.Thread.Sleep(2000);
+            ipartida(jugador1.nombre, jugador1.caracter, jugador2.nombre, jugador2.caracter);
+       
         }
 
         static void instrucciones()
@@ -69,41 +70,123 @@ namespace Gato
 
         }
 
-        static void iniciopartida(string n1, string n2)
+        static void ipartida(string n1, string c1, string n2, string c2)
         {
             Console.Clear();
             jugador j1 = new jugador();
             jugador j2 = new jugador();
-            string leer;
-            mytablero tablero = new mytablero();
-            
+            tablero mytablero = new tablero();
             j1.nombre = n1;
+            j1.caracter = c1;
             j2.nombre = n2;
+            j2.caracter = c2;
 
-            int myposition;
+            string spotition;
+            int ipotition;
             int njugador = 1;
+            bool ganador = true;
 
-            do
+            
+            while (ganador)
             {
-               
                 Console.Clear();
-                
+
+
+                formateador(ref mytablero.position);
 
                 if (njugador == 1)
                 {
+                    
                     Console.Write(j1.nombre +  " selecciona una posición");
-                    leer = Console.ReadLine();
-                    bool isString = int.TryParse(leer, out myposition);
-                    Console.WriteLine(myposition);
-                    Console.Read();
+                    spotition = Console.ReadLine();
+                    try
+                    {
+                        ipotition = Convert.ToInt16(spotition);
+                        ipotition = ipotition - 1;
+                        if(String.IsNullOrEmpty(mytablero.position[ipotition]))
+                        {
+                            mytablero.position[ipotition] = j1.caracter;
+
+                        }
+                        else
+                        {
+                            Console.WriteLine("Posicion ocupada, perdiste el turno :(");
+                            System.Threading.Thread.Sleep(1000);
+                           
+                        }
+                    }
+                    catch(FormatException)
+                    {
+                        Console.WriteLine("Posicion invalidad, turno perdido :(");
+                    }                 
+                   
+                }
+                if (njugador == 2)
+                {
+                    
+                    Console.Write(j2.nombre + " selecciona una posición");
+                    spotition = Console.ReadLine();
+                    try
+                    {
+                        ipotition = Convert.ToInt16(spotition);
+                        ipotition = ipotition - 1;
+                        if (String.IsNullOrEmpty(mytablero.position[ipotition]))
+                        {
+                            mytablero.position[ipotition] = j2.caracter;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Posicion ocupada, perdiste el turno :(");
+                            System.Threading.Thread.Sleep(1000);
+                           
+                        }
+                    }
+                    catch (FormatException)
+                    {
+                        Console.WriteLine("Posicion invalidad, turno perdido :(");
+                                           }
+                   
+                }
+
+
+
+                
+                if (njugador == 1)
+                {
                     njugador = 2;
                 }
-                
+                else if (njugador == 2)
+                {
+                    njugador = 1;
+                }
+            }
+           
 
-            } while (j1.puntos==3 && j2.puntos==3);
 
-            Console.Read();
         }
-       
+
+
+       static void formateador(ref string[] tab)
+
+        {
+            
+
+            for(int i=0; i<=8; i++)
+            {
+                if (tab[i]== null)
+                {
+                    int x = i + 1;
+                    tab[i]= Convert.ToString(x);
+                }
+            }
+            Console.WriteLine("\n     " + tab[0] + " | " + tab[1] + "  | " + tab[2]);
+            Console.WriteLine("\n   ___  ___  ___");
+            Console.WriteLine("\n     " + tab[3] + " | " + tab[4] + "  | " + tab[5]);
+            Console.WriteLine("\n   ___  ___  ___");
+            Console.WriteLine("\n     " + tab[6] + " | " + tab[7] + "  | " + tab[8]);
+
+            
+
+        }
     }
 }

@@ -9,17 +9,17 @@ namespace Gato
     class jugador
     {
 
-        public string nombre;
-        public char caracter;
-        string[] position = new string[9];
-        public int puntos;
+        public string nombre { get; set; }
+        public string caracter{ get; set; }
+        public int puntos { get; set; }
 
     }
 
-    class mytablero
+    class tablero
     {
-        string[] pos = new string[9];
+        public string[] position = new string[9];
     }
+   
 
    
 }
