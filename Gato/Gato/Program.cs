@@ -74,18 +74,31 @@ namespace Gato
             Console.Clear();
             jugador j1 = new jugador();
             jugador j2 = new jugador();
+            string leer;
             mytablero tablero = new mytablero();
             
             j1.nombre = n1;
             j2.nombre = n2;
-            int position;
+
+            int myposition;
+            int njugador = 1;
 
             do
             {
+               
                 Console.Clear();
-                Console.WriteLine("Selecciona una posición");
-                position = int.Parse(Console.ReadLine());
-                Console.WriteLine(position);
+                
+
+                if (njugador == 1)
+                {
+                    Console.Write(j1.nombre +  " selecciona una posición");
+                    leer = Console.ReadLine();
+                    bool isString = int.TryParse(leer, out myposition);
+                    Console.WriteLine(myposition);
+                    Console.Read();
+                    njugador = 2;
+                }
+                
 
             } while (j1.puntos==3 && j2.puntos==3);
 
