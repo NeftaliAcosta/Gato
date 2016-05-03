@@ -83,6 +83,7 @@ namespace Gato
 
             string spotition;
             string var="";
+            int var2 = 0;
             int ipotition;
             int njugador = 1;
             bool ganador = true;
@@ -110,6 +111,7 @@ namespace Gato
                         }
                         else if(String.IsNullOrEmpty(mytablero.position[ipotition])){
                             mytablero.position[ipotition] = j1.caracter;
+                            var2 = var2 + 1;
                         }
                         else
                         {
@@ -142,6 +144,7 @@ namespace Gato
                         else if (String.IsNullOrEmpty(mytablero.position[ipotition]))
                         {
                             mytablero.position[ipotition] = j2.caracter;
+                            var2 = var2 + 1;
                         }
                         else
                         {
@@ -172,10 +175,12 @@ namespace Gato
                     }
                     ganador = false;
                 }
-                else if (var == "N")
+
+                if (var2 == 9)
                 {
                     Console.WriteLine("Esta machaca fue empate!!!");
                     System.Threading.Thread.Sleep(6000);
+                    ganador = false;
                 }
 
                 if (njugador == 1)
@@ -223,7 +228,7 @@ namespace Gato
             {
                 ganador = "X";
             }
-            else if (array[0] == "O" && array[1] == "O" && array[2] == "=")
+            else if (array[0] == "O" && array[1] == "O" && array[2] == "O")
             {
                 ganador = "O";
             }
@@ -283,10 +288,8 @@ namespace Gato
             {
                 ganador = "O";
             }
-            else
-            {
-                ganador = "N";
-            }
+           
+            
             return ganador;
         }
     }
