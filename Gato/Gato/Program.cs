@@ -175,6 +175,20 @@ namespace Gato
                     }
                     ganador = false;
                 }
+                else if (var == "O")
+                {
+                    if (j1.caracter == "O")
+                    {
+                        Console.WriteLine("¡¡¡Felicidades " + j1.nombre + " ganaste la partida!!!");
+                        System.Threading.Thread.Sleep(6000);
+                    }
+                    else
+                    {
+                        Console.WriteLine("¡¡¡Felicidades " + j2.nombre + " ganaste la partida!!!");
+                        System.Threading.Thread.Sleep(6000);
+                    }
+                    ganador = false;
+                }
 
                 if (var2 == 9)
                 {
