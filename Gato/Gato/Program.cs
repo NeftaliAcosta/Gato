@@ -1,4 +1,13 @@
-﻿using System;
+﻿/*
+ Autor: Neftalí Acosta
+ AUtor URL: https://neftaliacosta.com
+ URL: https://github.com/NeftaliAcosta/Gato/wiki
+ Contacto: hola@neftaliacosta.com
+ Versión: 1.5
+ Ultima fecha de actualización: 02/05/2016
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
