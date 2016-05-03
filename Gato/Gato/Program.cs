@@ -82,6 +82,7 @@ namespace Gato
             j2.caracter = c2;
 
             string spotition;
+            string var="";
             int ipotition;
             int njugador = 1;
             bool ganador = true;
@@ -90,9 +91,7 @@ namespace Gato
             while (ganador)
             {
                 Console.Clear();
-
-
-                formateador(ref mytablero.position);
+                formateador(mytablero.position);
 
                 if (njugador == 1)
                 {
@@ -103,10 +102,14 @@ namespace Gato
                     {
                         ipotition = Convert.ToInt16(spotition);
                         ipotition = ipotition - 1;
-                        if(String.IsNullOrEmpty(mytablero.position[ipotition]))
+                        if(ipotition < 0 || ipotition > 8)
                         {
-                            mytablero.position[ipotition] = j1.caracter;
+                            Console.WriteLine("La posicion no existe, perdiste el turno :(");
+                            System.Threading.Thread.Sleep(1000);
 
+                        }
+                        else if(String.IsNullOrEmpty(mytablero.position[ipotition])){
+                            mytablero.position[ipotition] = j1.caracter;
                         }
                         else
                         {
@@ -123,14 +126,20 @@ namespace Gato
                 }
                 if (njugador == 2)
                 {
-                    
+
                     Console.Write(j2.nombre + " selecciona una posición");
                     spotition = Console.ReadLine();
                     try
                     {
                         ipotition = Convert.ToInt16(spotition);
                         ipotition = ipotition - 1;
-                        if (String.IsNullOrEmpty(mytablero.position[ipotition]))
+                        if (ipotition < 0 || ipotition > 8)
+                        {
+                            Console.WriteLine("La posicion no existe, perdiste el turno :(");
+                            System.Threading.Thread.Sleep(1000);
+
+                        }
+                        else if (String.IsNullOrEmpty(mytablero.position[ipotition]))
                         {
                             mytablero.position[ipotition] = j2.caracter;
                         }
@@ -138,19 +147,37 @@ namespace Gato
                         {
                             Console.WriteLine("Posicion ocupada, perdiste el turno :(");
                             System.Threading.Thread.Sleep(1000);
-                           
+
                         }
                     }
                     catch (FormatException)
                     {
                         Console.WriteLine("Posicion invalidad, turno perdido :(");
-                                           }
-                   
+                    }
+
                 }
 
+                var= validarganador(mytablero.position);
+                if (var == "X")
+                {
+                    if (j1.caracter == "X")
+                    {
+                        Console.WriteLine("¡¡¡Felicidades "+ j1.nombre + " ganaste la partida!!!");
+                        System.Threading.Thread.Sleep(6000);
+                    }
+                    else
+                    {
+                        Console.WriteLine("¡¡¡Felicidades " + j2.nombre + " ganaste la partida!!!");
+                        System.Threading.Thread.Sleep(6000);
+                    }
+                    ganador = false;
+                }
+                else if (var == "N")
+                {
+                    Console.WriteLine("Esta machaca fue empate!!!");
+                    System.Threading.Thread.Sleep(6000);
+                }
 
-
-                
                 if (njugador == 1)
                 {
                     njugador = 2;
@@ -166,27 +193,101 @@ namespace Gato
         }
 
 
-       static void formateador(ref string[] tab)
-
+      static void formateador(string[] tab)
         {
-            
-
-            for(int i=0; i<=8; i++)
+            var nuevoTab = new string[tab.Length];
+            tab.CopyTo(nuevoTab, 0);
+            for (int i=0; i<=8; i++)
             {
-                if (tab[i]== null)
+                if (nuevoTab[i]== null)
                 {
                     int x = i + 1;
-                    tab[i]= Convert.ToString(x);
+                    nuevoTab[i]= Convert.ToString(x);
                 }
             }
-            Console.WriteLine("\n     " + tab[0] + " | " + tab[1] + "  | " + tab[2]);
+            Console.WriteLine("\n     " + nuevoTab[0] + " | " + nuevoTab[1] + "  | " + nuevoTab[2]);
             Console.WriteLine("\n   ___  ___  ___");
-            Console.WriteLine("\n     " + tab[3] + " | " + tab[4] + "  | " + tab[5]);
+            Console.WriteLine("\n     " + nuevoTab[3] + " | " + nuevoTab[4] + "  | " + nuevoTab[5]);
             Console.WriteLine("\n   ___  ___  ___");
-            Console.WriteLine("\n     " + tab[6] + " | " + tab[7] + "  | " + tab[8]);
+            Console.WriteLine("\n     " + nuevoTab[6] + " | " + nuevoTab[7] + "  | " + nuevoTab[8]);
 
             
 
+        }
+
+
+        static string validarganador(string[] array)
+        {
+            string ganador="";
+            if(array[0]=="X" && array[1]=="X" && array[2]=="X")
+            {
+                ganador = "X";
+            }
+            else if (array[0] == "O" && array[1] == "O" && array[2] == "=")
+            {
+                ganador = "O";
+            }
+            else if (array[3] == "X" && array[4] == "X" && array[5] == "X")
+            {
+                ganador = "X";
+            }
+            else if (array[3] == "O" && array[4] == "O" && array[5] == "O")
+            {
+                ganador = "O";
+            }
+            else if (array[6] == "X" && array[7] == "X" && array[8] == "X")
+            {
+                ganador = "X";
+            }
+            else if (array[6] == "O" && array[7] == "O" && array[8] == "O")
+            {
+                ganador = "O";
+            }
+            else if (array[0] == "X" && array[3] == "X" && array[6] == "X")
+            {
+                ganador = "X";
+            }
+            else if (array[0] == "O" && array[3] == "O" && array[6] == "O")
+            {
+                ganador = "O|";
+            }
+            else if (array[1] == "X" && array[4] == "X" && array[7] == "X")
+            {
+                ganador = "X";
+            }
+            else if (array[1] == "O" && array[4] == "O" && array[7] == "O")
+            {
+                ganador = "O";
+            }
+            else if (array[2] == "X" && array[5] == "X" && array[8] == "X")
+            {
+                ganador = "X";
+            }
+            else if (array[2] == "O" && array[5] == "O" && array[8] == "O")
+            {
+                ganador = "O";
+            }
+            else if (array[0] == "X" && array[4] == "X" && array[8] == "X")
+            {
+                ganador = "X";
+            }
+            else if (array[0] == "O" && array[4] == "O" && array[8] == "O")
+            {
+                ganador = "O";
+            }
+            else if (array[2] == "X" && array[4] == "X" && array[6] == "X")
+            {
+                ganador = "X";
+            }
+            else if (array[2] == "O" && array[4] == "O" && array[6] == "O")
+            {
+                ganador = "O";
+            }
+            else
+            {
+                ganador = "N";
+            }
+            return ganador;
         }
     }
 }
