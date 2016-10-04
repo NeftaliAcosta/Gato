@@ -12,12 +12,11 @@ Que el juego permita jugar el juego, bajo el siguiente criterio
 
 4 de Octubre:
 
-Nuevas funcionalidades (Proximamente):
+Nuevas funcionalidades:
 - Permitir continuar jugando
-- Permitir guardar puntos por partida (marcador)
 - Permitir guardar  score
 - Perrmitir conexión a mysql para guardar registro del score
-- Mostrar los últimos 5 mayores puntuaciones
+- Mostrar Score
 - Crear apartado para mostrar score
 
 
