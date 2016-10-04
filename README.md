@@ -10,7 +10,8 @@ Que el juego permita jugar el juego, bajo el siguiente criterio
 - Gana el jugador que logre poner 3 figuras en una línea (vertical, horizontal o diagonal). 
 - En el caso de que se ocupen todas las casillas y ningún jugador haya realizado una línea recta, se declara empate.
 
---4 de Octubre--
+4 de Octubre:
+
 Nuevas funcionalidades (Proximamente):
 -Permitir continuar jugando
 -Permitir guardar puntos por partida (marcador)
