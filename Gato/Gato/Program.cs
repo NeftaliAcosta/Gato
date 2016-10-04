@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
 
 
 namespace Gato
@@ -19,16 +20,61 @@ namespace Gato
     class Program
     {
         /*Inicio Declaración de variables globales*/
-        
+
 
         /*Inicio Declaración de variables globales*/
         static void Main(string[] args)
         {
+            bdconection myconect = new bdconection();
+            string resp = "";
+            do{
+                
+                menu();
+                resp = Console.ReadLine();
+                switch (resp)
+                    {
+                        case "A":
+                            Console.Clear();
+                            inicio();
+                            Console.WriteLine("Seleccionaste A");
+                            break;
+                        case "B":
+                            Console.Clear();
+                            myconect.consultar();
+                            Console.WriteLine("Seleccionaste B");
+                            break;
+                        case "X":
+                            Console.Clear();
+                            Console.WriteLine("Seleccionaste C");
+                            break;
+                        default:
+                            Console.Clear();
+                            Console.WriteLine("Seleccion invalida");
+                            break;
+
+
+                    }
+                }while(resp != "X");
+
             
+
+    
+        }
+        static void menu()
+        {
+            Console.Clear();
+            Console.WriteLine("Juego del Gato V: 1.5");
+            Console.WriteLine("");
+            Console.WriteLine("=========MENÚ========");
+            Console.WriteLine("Presiona 'A' para iniciar una partida");
+            Console.WriteLine("Presiona 'B' para ver el marcador");
+            Console.WriteLine("Presiona 'X' para salir");
+        }
+
+        static void inicio()
+        {
             jugador jugador1 = new jugador();
             jugador jugador2 = new jugador();
-           
-
             instrucciones();
             Console.WriteLine("Escriba el nombre del jugador 1");
             jugador1.nombre = Console.ReadLine();
@@ -53,9 +99,7 @@ namespace Gato
             Console.WriteLine("¡Preparando la partida!.........");
             System.Threading.Thread.Sleep(2000);
             ipartida(jugador1.nombre, jugador1.caracter, jugador2.nombre, jugador2.caracter);
-       
         }
-
         static void instrucciones()
         {
             tablero mitab = new tablero();
@@ -66,6 +110,7 @@ namespace Gato
 
         static void ipartida(string n1, string c1, string n2, string c2)
         {
+            bdconection mycon = new bdconection();
             Console.Clear();
             jugador j1 = new jugador();
             jugador j2 = new jugador();
@@ -76,13 +121,13 @@ namespace Gato
             j2.caracter = c2;
 
             string spotition;
-            string var="";
+            string var = "";
             int var2 = 0;
             int ipotition;
             int njugador = 1;
             bool ganador = true;
 
-            
+
             while (ganador)
             {
                 Console.Clear();
@@ -90,20 +135,21 @@ namespace Gato
 
                 if (njugador == 1)
                 {
-                    
-                    Console.Write(j1.nombre +  " selecciona una posición");
+
+                    Console.Write(j1.nombre + " selecciona una posición");
                     spotition = Console.ReadLine();
                     try
                     {
                         ipotition = Convert.ToInt16(spotition);
                         ipotition = ipotition - 1;
-                        if(ipotition < 0 || ipotition > 8)
+                        if (ipotition < 0 || ipotition > 8)
                         {
                             Console.WriteLine("La posicion no existe, perdiste el turno :(");
                             System.Threading.Thread.Sleep(1000);
 
                         }
-                        else if(String.IsNullOrEmpty(mytablero.position[ipotition])){
+                        else if (String.IsNullOrEmpty(mytablero.position[ipotition]))
+                        {
                             mytablero.position[ipotition] = j1.caracter;
                             var2 = var2 + 1;
                         }
@@ -111,14 +157,14 @@ namespace Gato
                         {
                             Console.WriteLine("Posicion ocupada, perdiste el turno :(");
                             System.Threading.Thread.Sleep(1000);
-                           
+
                         }
                     }
-                    catch(FormatException)
+                    catch (FormatException)
                     {
                         Console.WriteLine("Posicion invalidad, turno perdido :(");
-                    }                 
-                   
+                    }
+
                 }
                 if (njugador == 2)
                 {
@@ -154,18 +200,20 @@ namespace Gato
 
                 }
 
-                var= validarganador(mytablero.position);
+                var = validarganador(mytablero.position);
                 if (var == "X")
                 {
                     if (j1.caracter == "X")
                     {
-                        Console.WriteLine("¡¡¡Felicidades "+ j1.nombre + " ganaste la partida!!!");
+                        Console.WriteLine("¡¡¡Felicidades " + j1.nombre + " ganaste la partida!!!");
                         System.Threading.Thread.Sleep(6000);
+                        mycon.insertar(j1.nombre);
                     }
                     else
                     {
                         Console.WriteLine("¡¡¡Felicidades " + j2.nombre + " ganaste la partida!!!");
                         System.Threading.Thread.Sleep(6000);
+                        mycon.insertar(j2.nombre);
                     }
                     ganador = false;
                 }
@@ -175,11 +223,13 @@ namespace Gato
                     {
                         Console.WriteLine("¡¡¡Felicidades " + j1.nombre + " ganaste la partida!!!");
                         System.Threading.Thread.Sleep(6000);
+                        mycon.insertar(j1.nombre);
                     }
                     else
                     {
                         Console.WriteLine("¡¡¡Felicidades " + j2.nombre + " ganaste la partida!!!");
                         System.Threading.Thread.Sleep(6000);
+                        mycon.insertar(j2.nombre);
                     }
                     ganador = false;
                 }
@@ -200,13 +250,12 @@ namespace Gato
                     njugador = 1;
                 }
             }
-           
+
 
 
         }
 
-
-      static void formateador(string[] tab)
+        static void formateador(string[] tab)
         {
             var nuevoTab = new string[tab.Length];
             tab.CopyTo(nuevoTab, 0);
