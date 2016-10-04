@@ -3,7 +3,7 @@
  AUtor URL: https://neftaliacosta.com
  URL: https://github.com/NeftaliAcosta/Gato/wiki
  Contacto: hola@neftaliacosta.com
- Versión: 1.5
+ Versión: 1.6
  Ultima fecha de actualización: 02/05/2016
  */
 
@@ -63,7 +63,7 @@ namespace Gato
         static void menu()
         {
             Console.Clear();
-            Console.WriteLine("Juego del Gato V: 1.5");
+            Console.WriteLine("Juego del Gato V: 1.6");
             Console.WriteLine("");
             Console.WriteLine("=========MENÚ========");
             Console.WriteLine("Presiona 'A' para iniciar una partida");
