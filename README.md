@@ -17,7 +17,7 @@ Nuevas funcionalidades (Proximamente):
 - Permitir guardar puntos por partida (marcador)
 - Permitir guardar  score
 - Perrmitir conexión a mysql para guardar registro del score
-- Mostrar los últimos 5 mayores puntiaciones
+- Mostrar los últimos 5 mayores puntuaciones
 - Crear apartado para mostrar score
 
 
