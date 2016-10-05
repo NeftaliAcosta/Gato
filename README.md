@@ -10,14 +10,13 @@ Que el juego permita jugar el juego, bajo el siguiente criterio
 - Gana el jugador que logre poner 3 figuras en una línea (vertical, horizontal o diagonal). 
 - En el caso de que se ocupen todas las casillas y ningún jugador haya realizado una línea recta, se declara empate.
 
-4 de Octubre:
-
-Nuevas funcionalidades:
+Actualizado 4 de Octubre del 2016 Nuevas funcionalidades:(Versión 1.6)
 - Permitir continuar jugando
 - Permitir guardar  score
 - Perrmitir conexión a mysql para guardar registro del score
 - Mostrar Score
 - Crear apartado para mostrar score
 
+[Revisar documentación](https://github.com/NeftaliAcosta/Gato/wiki/Funciones)
 
 Mas detalles: https://neftaliacosta.com/codigo-juego-gato-c-sharp/
