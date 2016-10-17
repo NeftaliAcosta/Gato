@@ -3,8 +3,8 @@
  AUtor URL: https://neftaliacosta.com
  URL: https://github.com/NeftaliAcosta/Gato/wiki
  Contacto: hola@neftaliacosta.com
- Versión: 1.6
- Ultima fecha de actualización: 02/05/2016
+ Versión: 1.6.1
+ Ultima fecha de actualización: 17/10/2016
  */
 
 using System;
@@ -30,20 +30,20 @@ namespace Gato
             do{
                 
                 menu();
-                resp = Console.ReadLine();
+                resp = Console.ReadLine().ToLower();
                 switch (resp)
                     {
-                        case "A":
+                        case "a":
                             Console.Clear();
                             inicio();
                             Console.WriteLine("Seleccionaste A");
                             break;
-                        case "B":
+                        case "b":
                             Console.Clear();
                             myconect.consultar();
                             Console.WriteLine("Seleccionaste B");
                             break;
-                        case "X":
+                        case "x":
                             Console.Clear();
                             Console.WriteLine("Seleccionaste C");
                             break;
@@ -120,6 +120,7 @@ namespace Gato
             j2.nombre = n2;
             j2.caracter = c2;
 
+            bool esnumero;
             string spotition;
             string var = "";
             int var2 = 0;
@@ -140,18 +141,23 @@ namespace Gato
                     spotition = Console.ReadLine();
                     try
                     {
-                        ipotition = Convert.ToInt16(spotition);
+                        esnumero= Int32.TryParse(spotition, out ipotition);
                         ipotition = ipotition - 1;
-                        if (ipotition < 0 || ipotition > 8)
+                        if (esnumero && ipotition < 0 || ipotition > 8)
                         {
                             Console.WriteLine("La posicion no existe, perdiste el turno :(");
                             System.Threading.Thread.Sleep(1000);
 
                         }
-                        else if (String.IsNullOrEmpty(mytablero.position[ipotition]))
+                        else if (esnumero && String.IsNullOrEmpty(mytablero.position[ipotition]))
                         {
                             mytablero.position[ipotition] = j1.caracter;
                             var2 = var2 + 1;
+                        }
+                        else if (esnumero == false)
+                        {
+                            Console.WriteLine("¡TURNO PERDIDO! No ingresaste una posicion :(");
+                            System.Threading.Thread.Sleep(1000);
                         }
                         else
                         {
@@ -173,18 +179,23 @@ namespace Gato
                     spotition = Console.ReadLine();
                     try
                     {
-                        ipotition = Convert.ToInt16(spotition);
+                        esnumero = Int32.TryParse(spotition, out ipotition);
                         ipotition = ipotition - 1;
-                        if (ipotition < 0 || ipotition > 8)
+                        if (esnumero && ipotition < 0 || ipotition > 8)
                         {
                             Console.WriteLine("La posicion no existe, perdiste el turno :(");
                             System.Threading.Thread.Sleep(1000);
 
                         }
-                        else if (String.IsNullOrEmpty(mytablero.position[ipotition]))
+                        else if (esnumero && String.IsNullOrEmpty(mytablero.position[ipotition]))
                         {
                             mytablero.position[ipotition] = j2.caracter;
                             var2 = var2 + 1;
+                        }
+                        else if (esnumero == false)
+                        {
+                            Console.WriteLine("¡TURNO PERDIDO! No ingresaste una posicion :(");
+                            System.Threading.Thread.Sleep(1000);
                         }
                         else
                         {
