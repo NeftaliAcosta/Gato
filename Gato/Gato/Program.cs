@@ -3,7 +3,7 @@
  AUtor URL: https://neftaliacosta.com
  URL: https://github.com/NeftaliAcosta/Gato/wiki
  Contacto: hola@neftaliacosta.com
- Versión: 1.6.2
+ Versión: 1.6.2.0
  Ultima fecha de actualización: 17/10/2016
  */
 
